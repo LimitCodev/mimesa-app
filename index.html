@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiMesa - Mesa de trabajo</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- inicio -->
+<div id="intro">
+  <div class="taza">☕</div>
+  <p>Poniendo la mesa...</p>
+</div>
+
+<header>
+  <h1>MiMesa</h1>
+  <p>Mesa de trabajo estudiantil</p>
+</header>
+
+<!-- botones -->
+<nav id="dock">
+  <button onclick="abrir('card-promedio')">📝 Promedio</button>
+  <button onclick="abrir('card-tareas')">📋 Tareas</button>
+  <button onclick="abrir('card-login')">🔑 Login</button>
+  <button onclick="abrir('card-ppt')">✂️ PPT</button>
+  <button onclick="abrir('card-adivina')">🔢 Adivina</button>
+  <button onclick="abrir('card-conversor')">💵 USD→S/</button>
+  <button onclick="abrir('card-clima')">🌤️ Clima</button>
+  <button onclick="abrir('card-users')">👥 Usuarios</button>
+  <button onclick="abrir('card-prestamo')">🏠 Préstamo</button>
+  <button onclick="abrir('card-presupuesto')">💰 Presupuesto</button>
+  <button onclick="abrir('card-interes')">📈 Interés</button>
+  <button onclick="abrir('card-impuestos')">🧾 Impuestos</button>
+  <button onclick="abrir('card-descuento')">🏷️ Descuento</button>
+</nav>
+
+<main id="mesa">
+
+<!-- tablet -->
+  <section id="tablet">
+    <p id="tablet-msg">Toca un botón de arriba para trabajar.</p>
+
+    <section class="card papel-amarillo" id="card-promedio">
+      <h2>Promedio</h2>
+      <label for="n1">Nota 1</label>
+      <input id="n1" type="number" min="0" max="20" step="1" placeholder="0 - 20">
+      <label for="n2">Nota 2</label>
+      <input id="n2" type="number" min="0" max="20" step="1" placeholder="0 - 20">
+      <label for="n3">Nota 3</label>
+      <input id="n3" type="number" min="0" max="20" step="1" placeholder="0 - 20">
+      <button onclick="promedio()">Calcular promedio</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-promedio"></p>
+    </section>
+
+    <section class="card papel-azul" id="card-tareas">
+      <h2>Mis tareas</h2>
+      <input id="tarea-txt" type="text" placeholder="Agregar tarea..." maxlength="80">
+      <button onclick="agregarTarea()">+</button>
+      <ul id="tarea-lista"></ul>
+      <button onclick="borrarTareas()">Borrar todo</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+    </section>
+
+    <section class="card papel-azul" id="card-login">
+      <h2>Login</h2>
+      <label for="l-user">Usuario</label>
+      <input id="l-user" type="text" placeholder="usuario" maxlength="20">
+      <label for="l-pass">Contraseña</label>
+      <input id="l-pass" type="password" placeholder="••••••" maxlength="20">
+      <button onclick="login()">Entrar</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-login"></p>
+      <hr>
+      <p style="font-size:13px">Crea tu cuenta (se guarda solo en tu navegador). Tienes 3 intentos para entrar:</p>
+      <label for="r-user">Nuevo usuario</label>
+      <input id="r-user" type="text" placeholder="ej. juan" maxlength="20">
+      <label for="r-pass">Nueva clave</label>
+      <input id="r-pass" type="password" placeholder="mín. 4" maxlength="20">
+      <button onclick="registrar()">Registrarse</button>
+      <p class="res" id="r-reg"></p>
+    </section>
+
+    <section class="card papel-rosa" id="card-ppt">
+      <h2>Piedra, papel o tijera</h2>
+      <label for="ppt-you">Tu elección</label>
+      <select id="ppt-you">
+        <option value="1">Piedra</option>
+        <option value="2">Papel</option>
+        <option value="3">Tijera</option>
+      </select>
+      <button onclick="ppt()">Jugar contra la CPU</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-ppt"></p>
+    </section>
+
+    <section class="card papel-amarillo" id="card-adivina">
+      <h2>Adivina el número (1-50)</h2>
+      <input id="ad-num" type="number" min="1" max="50" step="1" placeholder="Tu intento">
+      <button onclick="adivinar()">Probar</button>
+      <button onclick="reiniciarAdivina()">Reiniciar</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-adivina"></p>
+    </section>
+
+    <section class="card papel-amarillo" id="card-conversor">
+      <h2>Conversor USD → PEN</h2>
+      <label for="c-usd">Dólares (USD)</label>
+      <input id="c-usd" type="number" min="0" step="0.01" placeholder="0.00">
+      <button onclick="convertir()">Convertir</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-conversor">Tasa en vivo con open.er-api.com</p>
+    </section>
+
+    <section class="card papel-azul" id="card-clima">
+      <h2>Clima</h2>
+      <button onclick="verClima()">Ver clima actual</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-clima"></p>
+    </section>
+
+    <section class="card papel-verde" id="card-users">
+      <h2>Usuarios</h2>
+      <button onclick="verUsuarios()">Cargar usuarios</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-users"></p>
+    </section>
+
+    <section class="card papel-verde" id="card-prestamo">
+      <h2>Préstamo</h2>
+      <label for="p-monto">Monto (S/)</label>
+      <input id="p-monto" type="number" min="0" step="0.01" placeholder="ej. 1000">
+      <label for="p-tasa">Tasa mensual (%)</label>
+      <input id="p-tasa" type="number" min="0" step="0.01" placeholder="ej. 5">
+      <label for="p-n">Cuotas</label>
+      <input id="p-n" type="number" min="1" step="1" placeholder="ej. 12">
+      <button onclick="prestamo()">Calcular cuota</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-prestamo"></p>
+    </section>
+
+    <section class="card papel-rosa" id="card-presupuesto">
+      <h2>Presupuesto</h2>
+      <label for="g-ing">Ingresos (S/)</label>
+      <input id="g-ing" type="number" min="0" step="0.01" placeholder="0">
+      <label for="g-ali">Alimentación (S/)</label>
+      <input id="g-ali" type="number" min="0" step="0.01" placeholder="0">
+      <label for="g-tra">Transporte (S/)</label>
+      <input id="g-tra" type="number" min="0" step="0.01" placeholder="0">
+      <label for="g-viv">Vivienda (S/)</label>
+      <input id="g-viv" type="number" min="0" step="0.01" placeholder="0">
+      <label for="g-oci">Ocio (S/)</label>
+      <input id="g-oci" type="number" min="0" step="0.01" placeholder="0">
+      <button onclick="presupuesto()">Analizar</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-presupuesto"></p>
+    </section>
+
+    <section class="card papel-amarillo" id="card-interes">
+      <h2>Interés simple y compuesto</h2>
+      <label for="i-cap">Capital (S/)</label>
+      <input id="i-cap" type="number" min="0" step="0.01" placeholder="Capital">
+      <label for="i-tasa">Tasa anual (%)</label>
+      <input id="i-tasa" type="number" min="0" step="0.01" placeholder="Tasa">
+      <label for="i-anos">Años</label>
+      <input id="i-anos" type="number" min="0" step="1" placeholder="Años">
+      <button onclick="interes()">Calcular</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-interes"></p>
+    </section>
+
+    <section class="card papel-verde" id="card-impuestos">
+      <h2>Impuestos</h2>
+      <label for="t-ing">Ingreso mensual (S/)</label>
+      <input id="t-ing" type="number" min="0" step="0.01" placeholder="Ingreso">
+      <button onclick="impuestos()">Calcular</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-impuestos"></p>
+    </section>
+
+    <section class="card papel-rosa" id="card-descuento">
+      <h2>Descuento en tienda</h2>
+      <label for="d-precio">Precio (S/)</label>
+      <input id="d-precio" type="number" min="0" step="0.01" placeholder="Precio">
+      <label for="d-desc">Descuento (%)</label>
+      <input id="d-desc" type="number" min="0" max="100" step="1" placeholder="% descuento">
+      <button onclick="descuento()">Precio final</button>
+      <button class="btn-secondary" onclick="volver()">Volver</button>
+      <p class="res" id="r-descuento"></p>
+    </section>
+  </section>
+
+<!-- hoja -->
+  <aside id="hoja-wrap">
+    <h2>Hoja <span id="hoja-num"></span></h2>
+    <ul id="hoja"></ul>
+    <button class="btn-secondary" onclick="limpiarHoja()">Limpiar hoja</button>
+    <button class="btn-secondary" onclick="agrandarHoja()">Agrandar</button>
+  </aside>
+
+</main>
+
+<!-- arena -->
+<div id="arena">
+  <div id="arena-box">
+    <div id="arena-versus">
+      <span id="arena-yo">✊</span>
+      <span id="arena-vs">VS</span>
+      <span id="arena-pc">✌️</span>
+    </div>
+    <p id="arena-txt"></p>
+  </div>
+</div>
+
+<footer>
+  <p>MiMesa: Html, css y js</p>
+</footer>
+
+<script src="app.js"></script>
+<script src="api.js"></script>
+</body>
+</html>
