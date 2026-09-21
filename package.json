@@ -1,0 +1,13 @@
+{
+  "name": "mimesa",
+  "version": "1.0.0",
+  "description": "MiMesa - mesa de trabajo web 2",
+  "scripts": {
+    "api": "json-server --watch db.json --port 3000",
+    "web": "npx live-server --port=5500"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "json-server": "0.17.4"
+  }
+}

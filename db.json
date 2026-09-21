@@ -1,0 +1,15 @@
+{
+  "usuarios": [
+    { "id": 1, "user": "jquispe", "nombre": "Juan Quispe Huamán" },
+    { "id": 2, "user": "mtorres", "nombre": "María Torres Salas" },
+    { "id": 3, "user": "lparedes", "nombre": "Luis Paredes Ríos" },
+    { "id": 4, "user": "ahuaman", "nombre": "Ana Huamán Flores" },
+    { "id": 5, "user": "cmendoza", "nombre": "Carlos Mendoza Lima" }
+  ],
+  "notas": [
+    { "id": 1, "alumno": "Juan Quispe", "n1": 15, "n2": 13, "n3": 16 }
+  ],
+  "gastos": [
+    { "id": 1, "mes": "septiembre", "total": 1200 }
+  ]
+}
