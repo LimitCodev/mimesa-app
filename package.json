@@ -7,8 +7,7 @@
     "api": "json-server --watch db.json --port 3000",
     "web": "npx live-server --port=5500"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "json-server": "0.17.4"
-  }
+  },
 }
