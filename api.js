@@ -117,6 +117,7 @@ function verUsuarios() {
             { nombre: "Luis Paredes Ríos" }
           ]);
         });
+      });
     });
 }
 
