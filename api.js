@@ -82,7 +82,7 @@ function verClima() {
 // usuarios
 function verUsuarios() {
   escribir("r-users", "Cargando...");
-  fetch("http://localhost:3000/usuarios")
+  fetch("https://mimesa-app.onrender.com/usuarios")
     .then(function (r) {
       if (!r.ok) throw new Error("http");
       return r.json();
@@ -91,7 +91,17 @@ function verUsuarios() {
       verListaPeru(lista);
     })
     .catch(function () {
-      // host: mismo db.json servido por pages
+      // local
+      fetch("http://localhost:3000/usuarios")
+        .then(function (r) {
+          if (!r.ok) throw new Error("http");
+          return r.json();
+        })
+        .then(function (lista) {
+          verListaPeru(lista);
+        })
+        .catch(function () {
+          // host: mismo db.json servido por pages
       fetch("db.json")
         .then(function (r) {
           if (!r.ok) throw new Error("http");
