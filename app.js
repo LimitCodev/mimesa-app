@@ -3,6 +3,13 @@
 // datos
 var intentosLogin = 3;
 
+// users
+var USERS = [
+  { user: "juan", pass: "1234" },
+  { user: "maria", pass: "1234" },
+  { user: "luis", pass: "1234" }
+];
+
 // juego
 var secreto = Math.floor(Math.random() * 50) + 1;
 var intentosAd = 5;
@@ -107,11 +114,12 @@ function login() {
   }
   var u = document.getElementById("l-user").value.trim();
   var p = document.getElementById("l-pass").value;
-  if (!u || !p) {
-    escribir("r-login", "Pon usuario y clave.", false);
-    return;
+  var ok = false;
+  var todos = USERS.concat(verExtras());
+  for (var i = 0; i < todos.length; i++) {
+    if (todos[i].user === u && todos[i].pass === p) ok = true;
   }
-  if (esRegistrado(u, p)) {
+  if (ok) {
     escribir("r-login", "Bienvenido, " + u, true);
     anotar("Login ok: " + u);
     intentosLogin = 3;
@@ -123,13 +131,6 @@ function login() {
   }
 }
 
-// hash
-function miniHash(s) {
-  var h = 0;
-  for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
-  return "h" + (h >>> 0).toString(16);
-}
-
 // registrar
 function registrar() {
   var u = document.getElementById("r-user").value.trim();
@@ -138,30 +139,23 @@ function registrar() {
     escribir("r-reg", "Usuario mín. 3 y clave mín. 4.", false);
     return;
   }
-  var lista = [];
-  try { lista = JSON.parse(localStorage.getItem("mimesa-users") || "[]"); } catch (e) {}
+  var lista = verExtras();
   for (var i = 0; i < lista.length; i++) {
-    if (lista[i].u === u) {
-      escribir("r-reg", "Ya registrado. Entra arriba.", false);
+    if (lista[i].user === u) {
+      escribir("r-reg", "Ya existe. Entra arriba.", false);
       return;
     }
   }
-  lista.push({ u: u, p: miniHash(p) });
+  lista.push({ user: u, pass: p });
   try { localStorage.setItem("mimesa-users", JSON.stringify(lista)); } catch (e) {}
-  escribir("r-reg", "Registrado. Entra con tu clave.", true);
+  escribir("r-reg", "Listo. Entra arriba.", true);
   anotar("Nuevo usuario: " + u);
 }
 
-// buscar user
-function esRegistrado(u, p) {
-  try {
-    var lista = JSON.parse(localStorage.getItem("mimesa-users") || "[]");
-    var h = miniHash(p);
-    for (var i = 0; i < lista.length; i++) {
-      if (lista[i].u === u && lista[i].p === h) return true;
-    }
-  } catch (e) {}
-  return false;
+// ver extras
+function verExtras() {
+  try { return JSON.parse(localStorage.getItem("mimesa-users") || "[]"); }
+  catch (e) { return []; }
 }
 
 // ppt

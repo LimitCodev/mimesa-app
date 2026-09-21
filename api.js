@@ -91,14 +91,22 @@ function verUsuarios() {
       verListaPeru(lista);
     })
     .catch(function () {
-      // sin api local: lista peruana de ejemplo
-      verListaPeru([
-        { nombre: "Juan Quispe Huamán" },
-        { nombre: "María Torres Salas" },
-        { nombre: "Luis Paredes Ríos" },
-        { nombre: "Ana Huamán Flores" },
-        { nombre: "Carlos Mendoza Lima" }
-      ]);
+      // host: mismo db.json servido por pages
+      fetch("db.json")
+        .then(function (r) {
+          if (!r.ok) throw new Error("http");
+          return r.json();
+        })
+        .then(function (d) {
+          verListaPeru(d.usuarios);
+        })
+        .catch(function () {
+          verListaPeru([
+            { nombre: "Juan Quispe Huamán" },
+            { nombre: "María Torres Salas" },
+            { nombre: "Luis Paredes Ríos" }
+          ]);
+        });
     });
 }
 
